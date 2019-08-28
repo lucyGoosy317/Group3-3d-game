@@ -1,0 +1,3 @@
+# Group3-3d-game
+<h1>3d game project </h1>
+Will be making a 3d game feel free to add to the read me-thanks, lucy
