@@ -10,7 +10,7 @@ public class charController : MonoBehaviour
 
     float runSpeed = 25.0f;
     //public float walkBackspeed = 2.0f;
-    public float rotateSpeed = 80.0f;
+     float rotateSpeed = 15.0f;
     float gravity = 15;
     float jumpHeight = 10;
     private Vector3 moveDirection =Vector3.zero;
@@ -57,9 +57,10 @@ public class charController : MonoBehaviour
         }
 
         moveDirection.y -= gravity * Time.deltaTime;
+        transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
         controller.Move(moveDirection * Time.deltaTime);
 
-        transform.Rotate(0,Input.GetAxis("Horizontal") * rotateSpeed *Time.deltaTime,0);
+       
         
 
     }
