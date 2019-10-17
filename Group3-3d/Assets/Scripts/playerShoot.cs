@@ -8,7 +8,10 @@ public class playerShoot : MonoBehaviour
     public GameObject barrelLocation;
     public AudioSource gunNoises;
     public AudioClip gunShot;
+    public AudioClip gunEmpty;
     bool shootingGat;
+    bool gatIsEmpty;
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +19,7 @@ public class playerShoot : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         shootingGat = true;
+        gatIsEmpty = true;
 
     }
 
@@ -25,11 +29,16 @@ public class playerShoot : MonoBehaviour
         findBarrelLocation();
         float fireTrigger = Input.GetAxis("Fire1");
         //Debug.Log(fireTrigger);
-        if (fireTrigger>0 && shootingGat)
+        if (fireTrigger>0 && shootingGat && currentWeaponAmmoCount.AmmoutCount > 0)
         {
             StartCoroutine(GunShootingAudio());
             Debug.Log("Fired");
             checkForHit();
+        }
+        if(fireTrigger>0 && gatIsEmpty &&currentWeaponAmmoCount.AmmoutCount == 0)
+        {
+            StartCoroutine(GunEmptyAudio());
+            Debug.Log("Gun Empty");
         }
         
        
@@ -62,5 +71,12 @@ public class playerShoot : MonoBehaviour
         yield return new WaitForSeconds(gunShot.length/4);
         shootingGat = true;
     }
-
+    IEnumerator GunEmptyAudio()
+    {
+        gatIsEmpty = false;
+        gunNoises.PlayOneShot(gunEmpty);
+        yield return new WaitForSeconds(gunEmpty.length);
+        gatIsEmpty = true;
+        //shootingGat = true;
+    }
 }
