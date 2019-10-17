@@ -1,0 +1,38 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class sceneManager : MonoBehaviour
+{
+    //loading levels, later will add relic items, player can only change to the next lvl 
+    private void OnTriggerEnter(Collider player)
+    {
+        Debug.Log("Entered Trigger of:"+ gameObject.name);
+        if (gameObject.name=="GoToLevel1" && player.gameObject.tag=="Player")
+        {
+            Debug.Log("going to lvl1");
+            SceneManager.LoadScene("lvl1");
+        }
+        if (gameObject.name == "GoToLevel2" && player.gameObject.tag == "Player")
+        {
+            Debug.Log("going to lvl2");
+            SceneManager.LoadScene("lvl2");
+        }
+        if (gameObject.name == "GoToLevel3" && player.gameObject.tag == "Player")
+        {
+            Debug.Log("going to lvl3");
+            SceneManager.LoadScene("lvl3");
+        }
+        if (gameObject.name == "GoToLevel4" && player.gameObject.tag == "Player")
+        {
+            Debug.Log("going to lvl4");
+            SceneManager.LoadScene("lvl4");
+        }
+        if (gameObject.name == "GoToLevel5" && player.gameObject.tag == "Player")
+        {
+            Debug.Log("going to lvl5");
+            SceneManager.LoadScene("lvl5");
+        }
+    }
+}

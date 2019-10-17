@@ -8,7 +8,7 @@ public class charController : MonoBehaviour
     //private CharacterController characterController;
     //private Animator anime;
 
-    public float runSpeed = 10.0f;
+    float runSpeed = 25.0f;
     //public float walkBackspeed = 2.0f;
     public float rotateSpeed = 80.0f;
     float gravity = 15;
