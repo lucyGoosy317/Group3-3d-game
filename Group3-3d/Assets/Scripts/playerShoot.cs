@@ -24,7 +24,7 @@ public class playerShoot : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         findBarrelLocation();
         float fireTrigger = Input.GetAxis("Fire1");
