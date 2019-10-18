@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class AmmoCount : MonoBehaviour
 {
     public int bulletInMag;
-    int countBullets;
+    public int countBullets;
     public int totalAmountOfBullets;
     public int maxAmountInMag;
     public Text bulletInMagDisplay;
     public Text totalAmountOfBulletsDisplay;
-    bool shootingGat;
+    public bool shootingGat;
     public AudioClip gunShot;
 
 
@@ -22,7 +22,7 @@ public class AmmoCount : MonoBehaviour
     {
         maxAmountInMag = 100;
         countBullets = 0;
-        bulletInMag = 10;
+        bulletInMag = 100;
         totalAmountOfBullets = 300;
         shootingGat = true;
         
@@ -99,7 +99,7 @@ public class AmmoCount : MonoBehaviour
         }
     }
 
-    IEnumerator GunShootingDisplayUpdate()
+    public IEnumerator GunShootingDisplayUpdate()
     {
         shootingGat = false;
         yield return new WaitForSeconds(gunShot.length / 4);
