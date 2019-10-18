@@ -20,7 +20,7 @@ public class AmmoCountForM4 : AmmoCount
     {
         currentWeaponAmmoCount.AmmoutCount = bulletInMag;
         currentWeaponAmmoCount.currentWeaponDamage = weaponDamage;
-
+        
         updateDisplay();
         if (Input.GetAxis("Fire1") > 0 && shootingGat)
         {

@@ -201,6 +201,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerWithMachineGun
       objectReference: {fileID: 0}
+    - target: {fileID: 6455978794028272797, guid: 116a7885b2ac3fb449437948ef456971,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6455978794028272798, guid: 116a7885b2ac3fb449437948ef456971,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -537,6 +542,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559747649080865736, guid: a3daeda951b37c744865815978e00056,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5559747649080865732, guid: a3daeda951b37c744865815978e00056,
         type: 3}
