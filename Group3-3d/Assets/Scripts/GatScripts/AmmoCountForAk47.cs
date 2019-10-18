@@ -12,6 +12,7 @@ public class AmmoCountForAk47 : AmmoCount
         bulletInMag = 30;
         totalAmountOfBullets = 120;
         shootingGat = true;
+        weaponDamage = 2;
 
     }
 
@@ -19,7 +20,7 @@ public class AmmoCountForAk47 : AmmoCount
     void Update()
     {
         currentWeaponAmmoCount.AmmoutCount = bulletInMag;
-
+        currentWeaponAmmoCount.currentWeaponDamage = weaponDamage;
         updateDisplay();
         if (Input.GetAxis("Fire1") > 0 && shootingGat)
         {

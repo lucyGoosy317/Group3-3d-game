@@ -12,12 +12,14 @@ public class AmmoCountForM4 : AmmoCount
         bulletInMag = 30;
         totalAmountOfBullets = 120;
         shootingGat = true;
+        weaponDamage = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
         currentWeaponAmmoCount.AmmoutCount = bulletInMag;
+        currentWeaponAmmoCount.currentWeaponDamage = weaponDamage;
 
         updateDisplay();
         if (Input.GetAxis("Fire1") > 0 && shootingGat)

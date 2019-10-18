@@ -14,6 +14,7 @@ public class AmmoCount : MonoBehaviour
     public Text totalAmountOfBulletsDisplay;
     public bool shootingGat;
     public AudioClip gunShot;
+    public int weaponDamage;
 
 
 
@@ -25,14 +26,14 @@ public class AmmoCount : MonoBehaviour
         bulletInMag = 100;
         totalAmountOfBullets = 300;
         shootingGat = true;
-        
+        weaponDamage = 3;
     }
 
     
     void Update()
     {
         currentWeaponAmmoCount.AmmoutCount = bulletInMag;
-        
+        currentWeaponAmmoCount.currentWeaponDamage = weaponDamage;
         updateDisplay();
         if (Input.GetAxis("Fire1") > 0 && shootingGat) {
             StartCoroutine(GunShootingDisplayUpdate());

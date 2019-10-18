@@ -19,7 +19,6 @@ public class changePlayerWeapons : MonoBehaviour
         weapons[2].SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
       

@@ -11,6 +11,7 @@ public class playerShoot : MonoBehaviour
     public AudioClip gunEmpty;
     bool shootingGat;
     bool gatIsEmpty;
+    
   
     // Start is called before the first frame update
     void Start()
@@ -60,7 +61,32 @@ public class playerShoot : MonoBehaviour
         Debug.DrawRay(barrelLocation.transform.TransformDirection(Vector3.forward),fwd,Color.red);
         if (Physics.Raycast(barrelLocation.transform.position, fwd, out objectHit, Mathf.Infinity))
         {
-            Debug.Log("I hit :"+objectHit.collider.name);
+            //Hitting an enemy
+            if (objectHit.collider.tag=="Enemy")
+            {
+                GameObject theEnemy = objectHit.collider.gameObject;
+                enemyAI damagedEnemy = theEnemy.GetComponentInParent<enemyAI>();
+                //AmmoCount currentWeaponDamage = GetComponentInChildren<AmmoCount>();
+                if (damagedEnemy.enemyHealth>0) {
+                    damagedEnemy.subtractHealth(currentWeaponAmmoCount.currentWeaponDamage);//temp damage
+                    Debug.Log("I hit :" + objectHit.collider.tag);
+                }
+                else
+                {
+                    Debug.Log("Enemy is dead, cant shoot it any more");
+                }
+            }
+            else
+            { 
+            Debug.Log("I hit :"+objectHit.collider.name +"Damn missed");
+            }
+
+            //Hitting a target
+            if (objectHit.collider.tag=="testTarget")
+            {
+                Debug.Log("Damage done to target: "+currentWeaponAmmoCount.currentWeaponDamage);
+            }
+
         }
     }
   
