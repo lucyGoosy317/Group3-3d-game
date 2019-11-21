@@ -23,6 +23,7 @@ public class enemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (enemyHealth >0) {
             agent.SetDestination(Player.transform.position);
             if (agent.remainingDistance < 3.5f)
@@ -41,6 +42,7 @@ public class enemyAI : MonoBehaviour
         {
             agent.isStopped = true;
             Debug.Log("Enemy is dead");
+            StartCoroutine(waitToDestroy());
         }
     }
 
@@ -49,4 +51,11 @@ public class enemyAI : MonoBehaviour
         enemyHealth -= damage;
         Debug.Log("enemy health:"+enemyHealth);
     }
+    IEnumerator waitToDestroy()
+    {
+        yield return new WaitForSeconds(10);
+        Destroy(gameObject);
+    }
+
+    
 }

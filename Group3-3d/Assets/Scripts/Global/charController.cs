@@ -64,4 +64,20 @@ public class charController : MonoBehaviour
         
 
     }
+
+
+    //Getting attacked by the enemy
+    public void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag=="EnemyMelee")
+        {
+            Debug.Log("Im getting hit");
+        }
+
+
+    }
+
+
+
+
 }
