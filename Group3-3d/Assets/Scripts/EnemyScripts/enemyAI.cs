@@ -25,11 +25,6 @@ public class enemyAI : MonoBehaviour
     public int attackValue;
     public int dyingValue;
 
-    Vector2 smoothDeltaPosition = Vector2.zero;
-    Vector2 velocity = Vector2.zero;
-    bool shouldMove;
-    bool shouldAttack;
-
 
     // Start is called before the first frame update
     private void Awake()
@@ -43,8 +38,7 @@ public class enemyAI : MonoBehaviour
         rangeToStop = agentRange.getRange();
         playerIsAlive = true;
         enemyAnime = gameObject.GetComponentInChildren<Animator>();
-        shouldMove = true;
-        shouldAttack = false;
+        isDead = false;
     }
 
     void Start()
@@ -124,6 +118,10 @@ public class enemyAI : MonoBehaviour
         agent.isStopped = true;
     }
    
+    public bool emenyIsDead()
+    {
+        return isDead;
+    }
    
 
 }

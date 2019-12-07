@@ -23,6 +23,12 @@ TagManager:
   - spawner
   - animeLocation
   - weaponLable
+  - deathmenu
+  - eventSystem
+  - optionmenu
+  - restartOption
+  - restartDeath
+  - restartOptions
   layers:
   - Default
   - TransparentFX

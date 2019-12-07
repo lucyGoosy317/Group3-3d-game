@@ -46,7 +46,9 @@ public class EnemyAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (stopMoving.emenyIsDead())
+            return;
+
         Vector3 heading = Player.transform.position - gameObject.transform.position;
         float distance = heading.magnitude;
         if (heading.sqrMagnitude< attackRange * attackRange && Time.time>nextAttack)

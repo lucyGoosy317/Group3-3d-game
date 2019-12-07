@@ -14,11 +14,12 @@ public class RayCastShoot : MonoBehaviour
     public float hitForce;//100f
     public Transform gunEnd;
     public GameObject gunBarrel;
-    [Header("Gun Sounds")]
+    [Header("Gun Sounds && Effects")]
     public AudioClip GunShot;
     public AudioClip EmptyGun;
     public AudioClip reloadGun;
     public WaitForSeconds reloadTime;
+  
 
     [Header("Ammo items")]
     public int ammoInMagStart;
@@ -111,7 +112,6 @@ public class RayCastShoot : MonoBehaviour
                 Debug.Log("What i hit :" + hit.collider.gameObject.name);
 
                 enemyAI enemyHealth = hit.collider.GetComponent<enemyAI>();
-
                 if (enemyHealth!=null)
                 {
                     Debug.Log("i hit an enemy");
@@ -168,6 +168,8 @@ public class RayCastShoot : MonoBehaviour
         bulletLine.enabled = false;
 
     }
+
+
 
     private IEnumerator clickingEffect()
     {
