@@ -5,10 +5,11 @@ using UnityEngine.AI;
 
 public class enemyAI : MonoBehaviour
 {
+    public Rigidbody rigidbody;
     private NavMeshAgent agent;
     private EnemyAttack agentRange;
     private float rangeToStop;
-    private bool isDead;
+    public bool isDead;
     private bool playerIsAlive;
     [Header("Enemy target")]
     public GameObject Player;
@@ -18,7 +19,7 @@ public class enemyAI : MonoBehaviour
 
     [Header("Enemy Movement speed")]
     public float speed;
-    private Animator enemyAnime;
+    public Animator enemyAnime;
 
     [Header("Enemy anime values")]
     public int movementValue;
@@ -93,6 +94,11 @@ public class enemyAI : MonoBehaviour
             Death();
         }
         Debug.Log("enemy health:"+enemyHealth);
+    }
+
+    public void knockback (float blast)
+    {
+        rigidbody.AddForce(Vector3.back * blast, ForceMode.Impulse);
     }
 
 

@@ -7,7 +7,7 @@ public class charController : MonoBehaviour
 {
     private CharacterController controller;
     private float runSpeed = 25.0f;
-    private float rotateSpeed = 15.0f;
+    private float rotateSpeed = 5.0f;
     private float gravity = 15;
     private float jumpHeight = 10;
     private Vector3 moveDirection =Vector3.zero;
