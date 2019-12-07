@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5559747648383492990}
   m_Layer: 5
   m_Name: RoundsInMagText
-  m_TagString: Untagged
+  m_TagString: ammoInMag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 5559747648429265330}
   m_Layer: 5
   m_Name: WeaponSelectedText
-  m_TagString: Untagged
+  m_TagString: weaponName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -659,7 +659,7 @@ GameObject:
   - component: {fileID: 5559747650352117637}
   m_Layer: 5
   m_Name: TotalRoundsText
-  m_TagString: Untagged
+  m_TagString: ammoTotal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

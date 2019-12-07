@@ -5,7 +5,14 @@ using UnityEngine.UI;
 
 public class changePlayerWeapons : MonoBehaviour
 {
-    public Text weaponDisplayLabel;
+
+
+    private string RightBumpButton = "RightBump";
+    private string LeftBumpButton = "LeftBump";
+    private int maxWeapons;
+    private int amountOfWeapons;
+
+    private Text weaponDisplayLabel;
     public List<GameObject> weapons;
     int currentWeaponValue;
     public static bool playerIsChangingWeapons;
@@ -13,83 +20,99 @@ public class changePlayerWeapons : MonoBehaviour
     public bool playerHasM4;
     public bool playerHasAk47;
     public bool playerhasMachineGun;
+    private GameObject FindWeaponLabel;
+   
+
+
     void Start()
     {
-        
+        maxWeapons = 2;
         currentWeaponValue = 0;
+        amountOfWeapons = 1;
         weapons[0].SetActive(true);
-        playerIsChangingWeapons = false;
-        weaponDisplayLabel.text = weapons[currentWeaponValue].name;
         weapons[1].SetActive(false);
         weapons[2].SetActive(false);
-        playerHasWeapon.Add(weapons[currentWeaponValue].name, true);
+        //playerHasWeapon.Add(weapons[currentWeaponValue].name, true);
     }
     private void Awake()
     {
-        playerHasWeapon = new Dictionary<string, bool>();
+        FindWeaponLabel = GameObject.FindGameObjectWithTag("weaponName");
+        weaponDisplayLabel = FindWeaponLabel.GetComponent<Text>();
+        //playerHasWeapon = new Dictionary<string, bool>();
     }
 
     void Update()
     {
-      
-        rotateThroughWeaponsFwd();
-        rotateThroughWeaponsBack();
+
+
+        if (Input.GetButtonDown(RightBumpButton))
+        {
+            Debug.Log("Right bumper");
+            rotateThroughWeaponsFwd();
+        }
+        if (Input.GetButtonDown(LeftBumpButton))
+        {
+            Debug.Log("Left bumper");
+            rotateThroughWeaponsBack();
+        }
+        
     }
 
 
     void rotateThroughWeaponsFwd()
     {
         
-        if (Input.GetButtonDown("RightBump") &&currentWeaponValue!=weapons.Capacity-1 &&playerHasWeapon.ContainsKey(weapons[currentWeaponValue+1].name))
-        {
-            if (weapons[currentWeaponValue+1] !=null)
+            if (currentWeaponValue != maxWeapons)
             {
                 Debug.Log("Weapon change can happen");
+                weapons[currentWeaponValue].SetActive(false);
+                currentWeaponValue++;
+                weapons[currentWeaponValue].SetActive(true);
+                weaponDisplayLabel.text = weapons[currentWeaponValue].GetComponent<RayCastShoot>().weaponType;
             }
             else
             {
                 Debug.Log("Weapon change cant happen, null");
             }
-            Debug.Log("Going fwd through weapons");
-            weapons[currentWeaponValue].SetActive(false);
-            currentWeaponValue++;
-            weapons[currentWeaponValue].SetActive(true);
-            weaponDisplayLabel.text = weapons[currentWeaponValue].name;
-
-        }
-       // else
-        //{
-          //  Debug.Log("Player does not have any other weapons to rotate through");
-        //}  
+         
     }
+
+    
+
 
     void rotateThroughWeaponsBack()
     {
+        Debug.Log("trying to change weapons back");
         if (Input.GetButtonDown("LeftBump") && currentWeaponValue >0)
         {
             Debug.Log("Going back through weapons");
             weapons[currentWeaponValue].SetActive(false);
             currentWeaponValue--;
             weapons[currentWeaponValue].SetActive(true);
-            weaponDisplayLabel.text = weapons[currentWeaponValue].name;
+            weaponDisplayLabel.text = weapons[currentWeaponValue].GetComponent<RayCastShoot>().weaponType;
         }
     }
 
+    /*
     public void OnTriggerEnter(Collider pickedUpWeapon)
     {
        // Debug.Log("Player ran into:" + pickedUpWeapon.name);
         if (pickedUpWeapon.gameObject.name=="AK74") {
             Debug.Log("Player picked up:" + pickedUpWeapon.name);
-            playerHasWeapon.Add(pickedUpWeapon.name,true);
+            //pickedUpWeapon.gameObject.tag = "AK74";
+            //playerHasWeapon.Add(pickedUpWeapon.name,true);
             Destroy(pickedUpWeapon.gameObject);
+            amountOfWeapons++;
 
         }
         if (pickedUpWeapon.gameObject.name=="MachineGun")
         {
             Debug.Log("Player picked up:" + pickedUpWeapon.name);
-            playerHasWeapon.Add(pickedUpWeapon.name, true);
+            // pickedUpWeapon.gameObject.tag = "MachineGun";
+            // playerHasWeapon.Add(pickedUpWeapon.name, true);
+            amountOfWeapons++;
             Destroy(pickedUpWeapon.gameObject);
         }
     }
-
+    */
 }

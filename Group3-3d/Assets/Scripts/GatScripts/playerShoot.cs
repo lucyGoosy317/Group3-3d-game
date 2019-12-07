@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class playerShoot : MonoBehaviour
 {
-   // public GameObject[] childObjects;
+    // public GameObject[] childObjects;
+    [Header("weapon items")]
     public GameObject barrelLocation;
     public AudioSource gunNoises;
     public AudioClip gunShot;
@@ -12,10 +13,23 @@ public class playerShoot : MonoBehaviour
     bool shootingGat;
     bool gatIsEmpty;
     
+
+    private string fire = "Fire1";
+    private string enemyTag = "Enemy";
+
+    [Header("Line Render for RayCast")]
+    public LineRenderer bulletRenderer;
+    public float bulletWidth;
+    public float bulletMaxLenth;
+    
+    
   
     // Start is called before the first frame update
     void Start()
     {
+        //Vector3[] intitBulletPositions = new Vector3[2] { Vector3.zero, Vector3.zero };
+        //bulletRenderer.SetPositions(intitBulletPositions);
+        //bulletRenderer.SetWidth(bulletWidth,bulletWidth);
         gunNoises = GetComponent<AudioSource>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -28,7 +42,7 @@ public class playerShoot : MonoBehaviour
     void Update()
     {
         findBarrelLocation();
-        float fireTrigger = Input.GetAxis("Fire1");
+        float fireTrigger = Input.GetAxis(fire);
         //Debug.Log(fireTrigger);
         if (fireTrigger>0 && shootingGat && currentWeaponAmmoCount.AmmoutCount > 0)
         {
@@ -58,11 +72,12 @@ public class playerShoot : MonoBehaviour
     {
         RaycastHit objectHit;
         Vector3 fwd = barrelLocation.transform.TransformDirection(Vector3.forward);
-        Debug.DrawRay(barrelLocation.transform.TransformDirection(Vector3.forward),fwd,Color.red);
+       // Debug.DrawRay(barrelLocation.transform.TransformDirection(Vector3.forward),fwd,Color.red);
         if (Physics.Raycast(barrelLocation.transform.position, fwd, out objectHit, Mathf.Infinity))
         {
             //Hitting an enemy
-            if (objectHit.collider.tag=="Enemy")
+           // bulletRenderer.SetPosition(0,objectHit.collider.transform.position);
+            if (objectHit.collider.tag==enemyTag)
             {
                 GameObject theEnemy = objectHit.collider.gameObject;
                 enemyAI damagedEnemy = theEnemy.GetComponentInParent<enemyAI>();

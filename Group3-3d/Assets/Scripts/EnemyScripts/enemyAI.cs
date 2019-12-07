@@ -5,57 +5,125 @@ using UnityEngine.AI;
 
 public class enemyAI : MonoBehaviour
 {
-    public NavMeshAgent agent;
+    private NavMeshAgent agent;
+    private EnemyAttack agentRange;
+    private float rangeToStop;
+    private bool isDead;
+    private bool playerIsAlive;
+    [Header("Enemy target")]
     public GameObject Player;
+    
+    [Header("Enemy Health")] 
     public int enemyHealth;
 
+    [Header("Enemy Movement speed")]
+    public float speed;
+    private Animator enemyAnime;
+
+    [Header("Enemy anime values")]
+    public int movementValue;
+    public int attackValue;
+    public int dyingValue;
+
+    Vector2 smoothDeltaPosition = Vector2.zero;
+    Vector2 velocity = Vector2.zero;
+    bool shouldMove;
+    bool shouldAttack;
 
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player");
+        agent = gameObject.GetComponent<NavMeshAgent>();
+        agent.speed = speed;
+       // agent.updatePosition = false;
+        agent.SetDestination(Player.transform.position);
+        agentRange = gameObject.GetComponent<EnemyAttack>();
+        rangeToStop = agentRange.getRange();
+        playerIsAlive = true;
+        enemyAnime = gameObject.GetComponentInChildren<Animator>();
+        shouldMove = true;
+        shouldAttack = false;
+    }
+
     void Start()
     {
 
-        Player = GameObject.Find("PlayerPrefab");
-        agent = GetComponent<NavMeshAgent>();
-        enemyHealth = 10;
+        isDead = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        if (enemyHealth >0) {
-            agent.SetDestination(Player.transform.position);
-            if (agent.remainingDistance < 3.5f)
-            {
-                agent = GetComponent<NavMeshAgent>();
-                Debug.Log("Agent has reached Player");
+       
+
+        if (playerIsAlive==false)
+           return;
+        agent.SetDestination(Player.transform.position);
+        if (enemyHealth>0) {
+            enemyAnime.SetInteger("condition",movementValue);
+           if (agent.remainingDistance < rangeToStop)
+          {
+                enemyAnime.SetInteger("condition", attackValue);
+                //Debug.Log("Agent has reached Player"+agent.remainingDistance);
                 agent.isStopped = true;
-            }
-            if (agent.remainingDistance > 3.5f)
-            {
-                Debug.Log("Agent has not reached Player yet");
+           } else
+           if (agent.remainingDistance > rangeToStop)
+           {
+                enemyAnime.SetInteger("condition", movementValue);
                 agent.isStopped = false;
-            }
+          } else if (isDead)
+            {
+                enemyAnime.SetInteger("condition", 0);
+                agent.isStopped = true;
+           }
         }
         else
         {
-            agent.isStopped = true;
-            Debug.Log("Enemy is dead");
-            StartCoroutine(waitToDestroy());
+            
+           agent.isStopped = true;
+
+           Death();
         }
+        
     }
 
     public void subtractHealth(int damage)
     {
         enemyHealth -= damage;
+        if (enemyHealth<=0)
+        {
+
+            Death();
+        }
         Debug.Log("enemy health:"+enemyHealth);
     }
+
+
+    public void Death()
+    {
+        enemyAnime.SetInteger("condition",3);
+        Debug.Log("Enemy is dead");
+        isDead = true;
+        agent.isStopped = true;
+        gameObject.GetComponent<Collider>().enabled = false;
+        StartCoroutine(waitToDestroy());
+    }
+
     IEnumerator waitToDestroy()
     {
         yield return new WaitForSeconds(10);
         Destroy(gameObject);
     }
 
-    
+    public void playerIsDeadStopMoving(bool isDead)
+    {
+        playerIsAlive = isDead;
+        agent.isStopped = true;
+    }
+   
+   
+
 }
