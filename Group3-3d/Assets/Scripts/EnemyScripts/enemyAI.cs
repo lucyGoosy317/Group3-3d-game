@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class enemyAI : MonoBehaviour
 {
-    public Rigidbody rigidbody;
+    
     private NavMeshAgent agent;
     private EnemyAttack agentRange;
     private float rangeToStop;
@@ -26,10 +26,12 @@ public class enemyAI : MonoBehaviour
     public int attackValue;
     public int dyingValue;
 
+    //[Header("Enemy Body")]
+    private Rigidbody Enemyrigidbody;
 
     // Start is called before the first frame update
     private void Awake()
-    {
+    {/*
         Player = GameObject.FindGameObjectWithTag("Player");
         agent = gameObject.GetComponent<NavMeshAgent>();
         agent.speed = speed;
@@ -40,11 +42,21 @@ public class enemyAI : MonoBehaviour
         playerIsAlive = true;
         enemyAnime = gameObject.GetComponentInChildren<Animator>();
         isDead = false;
-    }
+    */
+        }
 
     void Start()
     {
-
+        Enemyrigidbody = GetComponent<Rigidbody>();
+        Player = GameObject.FindGameObjectWithTag("Player");
+        agent = gameObject.GetComponent<NavMeshAgent>();
+        agent.speed = speed;
+        // agent.updatePosition = false;
+        agent.SetDestination(Player.transform.position);
+        agentRange = gameObject.GetComponent<EnemyAttack>();
+        rangeToStop = agentRange.getRange();
+        playerIsAlive = true;
+        enemyAnime = gameObject.GetComponentInChildren<Animator>();
         isDead = false;
     }
 
@@ -72,6 +84,8 @@ public class enemyAI : MonoBehaviour
           } else if (isDead)
             {
                 enemyAnime.SetInteger("condition", 0);
+                Enemyrigidbody.velocity = Vector3.zero;
+                Enemyrigidbody.angularVelocity = Vector3.zero;
                 agent.isStopped = true;
            }
         }
@@ -98,7 +112,7 @@ public class enemyAI : MonoBehaviour
 
     public void knockback (float blast)
     {
-        rigidbody.AddForce(Vector3.back * blast, ForceMode.Impulse);
+        Enemyrigidbody.AddForce(Vector3.back * blast, ForceMode.Impulse);
     }
 
 

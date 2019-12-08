@@ -87,10 +87,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f025f560c493cc4a96dba06868dd984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 4358148497933878055}
+  isDead: 0
   Player: {fileID: 1055397002120411736, guid: 012639aa5e0ac9d4bbe89417a5e732f5, type: 3}
   enemyHealth: 5
   speed: 7
+  enemyAnime: {fileID: 0}
   movementValue: 1
   attackValue: 2
   dyingValue: 3
@@ -137,7 +138,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 32
   m_CollisionDetection: 0
 --- !u!1 &6206818295621305715
 GameObject:

@@ -27,8 +27,8 @@ public class EnemyAttack : MonoBehaviour
 
     private void Awake()
     {
-        spawner = GameObject.FindGameObjectWithTag(spawnName);
-        stopSpawner = spawner.GetComponent<EnemySpawner>();
+       // spawner = GameObject.FindGameObjectWithTag(spawnName);
+       // stopSpawner = spawner.GetComponent<EnemySpawner>();
     }
 
     // Start is called before the first frame update
@@ -71,9 +71,9 @@ public class EnemyAttack : MonoBehaviour
                     int playerHealth = damagePlayer.getPlayerHealth();
                     if (playerHealth <= 0)
                     {
-                        spawnStopping = true;
+                        //spawnStopping = true;
                         stopMoving.playerIsDeadStopMoving(false);
-                        stopSpawner.stopSpawning(spawnStopping);
+                        //stopSpawner.stopSpawning(spawnStopping);
                         return;
                     }
                     damagePlayer.takeDamage(attackDamage);
