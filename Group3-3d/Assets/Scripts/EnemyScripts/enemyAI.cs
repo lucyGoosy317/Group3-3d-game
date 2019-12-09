@@ -56,11 +56,14 @@ public class enemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-       
 
-        if (playerIsAlive==false)
-           return;
+
+
+        if (playerIsAlive == false)
+        {
+            enemyAnime.SetInteger("condition",5);
+            return;
+        }
         agent.SetDestination(Player.transform.position);
         if (enemyHealth>0) {
             enemyAnime.SetInteger("condition",movementValue);
