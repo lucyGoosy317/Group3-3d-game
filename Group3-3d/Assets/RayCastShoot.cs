@@ -116,11 +116,17 @@ public class RayCastShoot : MonoBehaviour
                 {
                     Debug.Log("i hit an enemy");
                     enemyHealth.subtractHealth(gunDamage);
+                    //enemyHealth.knockback(10f);
+                }
+                if (hit.collider.gameObject.GetComponent<Rigidbody>()!=null)
+                {
+                    Debug.Log("Did have rigid body");
                     enemyHealth.knockback(10f);
                 }
 
                 if (hit.rigidbody !=null)
                 {
+                    
                     hit.rigidbody.AddForce(-hit.normal * hitForce);
                }
 

@@ -26,6 +26,7 @@ public class enemyAI : MonoBehaviour
     public int attackValue;
     public int dyingValue;
 
+    private EnemySpawner spawerAccess;
 
     // Start is called before the first frame update
     private void Awake()
@@ -98,7 +99,7 @@ public class enemyAI : MonoBehaviour
 
     public void knockback (float blast)
     {
-        rigidbody.AddForce(Vector3.back * blast, ForceMode.Impulse);
+       gameObject.GetComponent<Rigidbody>().AddForce(Vector3.back * blast, ForceMode.Impulse);
     }
 
 
@@ -109,12 +110,35 @@ public class enemyAI : MonoBehaviour
         isDead = true;
         agent.isStopped = true;
         gameObject.GetComponent<Collider>().enabled = false;
+        
+       
+        
+
+
         StartCoroutine(waitToDestroy());
     }
 
     IEnumerator waitToDestroy()
     {
         yield return new WaitForSeconds(10);
+        //checking to see if this is an indpendent enemy or spawned enemy
+        if (gameObject.GetComponentInParent<EnemySpawner>() != null)
+        {
+            spawerAccess = gameObject.GetComponentInParent<EnemySpawner>();
+            if (spawerAccess.enemiesKilled >= spawerAccess.RandomAmountOfEnemies)
+            {
+                spawerAccess.enemiesKilled = 0;
+                spawerAccess.enemyCounter = 0;
+                StartCoroutine(spawerAccess.EndlessWaves());
+            }
+            else
+            {
+                spawerAccess.enemiesKilled++;
+            }
+
+            Debug.Log("child of spawner");
+        }
+
         Destroy(gameObject);
     }
 

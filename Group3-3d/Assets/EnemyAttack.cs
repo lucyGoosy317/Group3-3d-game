@@ -73,9 +73,10 @@ public class EnemyAttack : MonoBehaviour
                     {
                         spawnStopping = true;
                         stopMoving.playerIsDeadStopMoving(false);
-                        stopSpawner.stopSpawning(spawnStopping);
+                        
                         return;
                     }
+                   
                     damagePlayer.takeDamage(attackDamage);
                 }
 
