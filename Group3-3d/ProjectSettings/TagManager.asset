@@ -29,6 +29,9 @@ TagManager:
   - restartOption
   - restartDeath
   - restartOptions
+  - keypadinput
+  - gatekeeper
+  - keypadinteract
   layers:
   - Default
   - TransparentFX
