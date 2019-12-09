@@ -7,7 +7,6 @@ public class Dance : MonoBehaviour
     public GameObject PuzzleMaster;
     private Puzzle puzzle;
     public string panelColor;
-    public bool panelON;
 
     void Start ()
     {
@@ -18,10 +17,7 @@ public class Dance : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (puzzle.isCorrectPanel(panelColor))
-            {
-                panelON = true;
-            }
+            puzzle.isCorrectPanel(panelColor);
 
         }
 

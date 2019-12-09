@@ -12,16 +12,9 @@ public class Puzzle : MonoBehaviour
     public string[] order;
     private string nextColor;
 
-    public static bool[] dancePanels = new bool[4];
     private bool allTrue = false;
     void Start()
     {
-        /*dancePanels[0] = false;
-        dancePanels[1] = false;
-        dancePanels[2] = false;
-        dancePanels[3] = false;
-        */
-
         order[0] = "Blue";
         order[1] = "Red";
         order[2] = "Yellow";
@@ -41,7 +34,7 @@ public class Puzzle : MonoBehaviour
         }
     }
 
-    public bool isCorrectPanel (string color)
+    public void isCorrectPanel (string color)
     {
         if (color == nextColor)
         {
@@ -50,18 +43,18 @@ public class Puzzle : MonoBehaviour
             {
                 Debug.Log("You did it!");
                 allTrue = true;
-                return true;
+                return;
             }
             nextColor = order[index + 1];
-            //dancePanels[index] = true;
+
             Debug.Log("Correct color. Next color is " + nextColor);
-            return true;
+            return;
 
         }else
         {
             nextColor = order[0];
             Debug.Log("Wrong color");
-            return false;
+            return;
         }
     }
 }
