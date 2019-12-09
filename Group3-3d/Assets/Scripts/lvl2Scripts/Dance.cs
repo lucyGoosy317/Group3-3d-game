@@ -4,11 +4,23 @@ using UnityEngine;
 
 public class Dance : MonoBehaviour
 {
-     private void OnTriggerEnter(Collider other)
+
+    private Puzzle puzzle;
+    public string panelColor;
+    public bool panelON;
+    private void OnTriggerEnter(Collider other)
     {
-        
-        MeshRenderer meshRend = GetComponent<MeshRenderer>();
-        meshRend.material.color = Color.black;
-        Debug.Log(other.name);
+        if (other.gameObject.tag == "Player")
+        {
+            if (puzzle.isCorrectPanel(panelColor))
+            {
+                
+                Debug.Log("Panel on");
+            }
+
+        }
+
     }
+
+     
 }
