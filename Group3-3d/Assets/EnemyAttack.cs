@@ -11,8 +11,9 @@ public class EnemyAttack : MonoBehaviour
     public int attackDamage;
     public float attackRate;
     public float attackRange;
+    [Header("Attack sound")]
     private AudioSource attackSounds;
-    //public AudioClip attackClip;
+    public AudioClip attackClip;
 
     //private fields
     private WaitForSeconds attackDuration;
@@ -23,7 +24,7 @@ public class EnemyAttack : MonoBehaviour
     EnemySpawner stopSpawner;
     private bool spawnStopping;
     string spawnName = "spawner";
-
+    private playerHealth playerHealthChecker;
 
     private void Awake()
     {
@@ -36,7 +37,9 @@ public class EnemyAttack : MonoBehaviour
     {
         spawnStopping = false;
         attackSounds = GetComponent<AudioSource>();
+        attackDuration = new WaitForSeconds(5f);
         Player = GameObject.FindGameObjectWithTag("Player");
+        playerHealthChecker = Player.GetComponent<playerHealth>();
         damagePlayer = Player.GetComponent<playerHealth>();
         stopMoving = gameObject.GetComponent<enemyAI>();
         
@@ -46,6 +49,13 @@ public class EnemyAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerHealthChecker.healthAmount<=0)
+        {
+            attackSounds.Stop();
+            stopMoving.playerIsDeadStopMoving(false);
+            return;
+        }
+
         if (stopMoving.emenyIsDead())
             return;
 
@@ -55,6 +65,7 @@ public class EnemyAttack : MonoBehaviour
         {
             nextAttack = Time.time + attackRate;
             //start coroutine
+             StartCoroutine(attack());
             RaycastHit hit;
 
             Vector3 fwd = gameObject.transform.TransformDirection(Vector3.forward);
@@ -66,6 +77,7 @@ public class EnemyAttack : MonoBehaviour
                 damagePlayer = hit.collider.GetComponent<playerHealth>();
                 if (damagePlayer !=null)
                 {
+
                     // Debug.Log("Enemy is hiting player");
                     //dont attack if player health is 0
                     int playerHealth = damagePlayer.getPlayerHealth();
@@ -95,8 +107,10 @@ public class EnemyAttack : MonoBehaviour
 
     IEnumerator attack()
     {
-        Debug.Log("Playing enemy attack sound");
-        yield return attackDuration;
+        attackSounds.clip = attackClip;
+        attackSounds.Play();
+        yield return new WaitForSeconds(attackClip.length);
+        attackSounds.Stop();
         Debug.Log("End Playing enemy attack sound");
     }
 

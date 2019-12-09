@@ -14,7 +14,10 @@ public class playerHealth : MonoBehaviour
     private charController player;
     private bool isAlive;
     private Animator playerOuchies;
-    
+    [Header("Player SFX")]
+    private AudioSource playerSounds;
+    public AudioClip playerGettingHit;
+    public AudioClip playerDying;
 
 
 
@@ -22,6 +25,7 @@ public class playerHealth : MonoBehaviour
     void Start()
     {
         isAlive = true;
+        playerSounds = GetComponent<AudioSource>();
         player = gameObject.GetComponent<charController>();
         playerTextObject = GameObject.FindGameObjectWithTag("currenthealth");
         playerLifeDisplay = playerTextObject.GetComponent<Text>();
@@ -60,6 +64,7 @@ public class playerHealth : MonoBehaviour
     {
         playerOuchies.SetInteger("condition",5);
         isAlive = false;
+        StartCoroutine(playerGettingHitSFX());
         player.isDead(false);
     }
     public int getPlayerHealth()
@@ -71,9 +76,21 @@ public class playerHealth : MonoBehaviour
         return isAlive;
     }
 
+    IEnumerator playerGettingHitSFX()
+    {
+        playerSounds.clip = playerDying;
+        playerSounds.Play();
+        yield return new WaitForSeconds(10f);
+       // playerSounds.Stop();
+    }
+
+
     IEnumerator playGotHitReaction()
     {
         playerOuchies.SetInteger("condition", 4);
+        playerSounds.clip = playerGettingHit;
+        playerSounds.Play();
         yield return new WaitForSeconds(.3f);
+        playerSounds.Stop();
     }
 }

@@ -26,11 +26,15 @@ public class enemyAI : MonoBehaviour
     public int attackValue;
     public int dyingValue;
 
+    [Header("Enemy clips")]
     private EnemySpawner spawerAccess;
-
+    private AudioSource EnemySounds;
+    public AudioClip dying;
+    //public AudioClip attacking;
     // Start is called before the first frame update
     private void Awake()
     {
+        EnemySounds = GetComponent<AudioSource>();
         Player = GameObject.FindGameObjectWithTag("Player");
         agent = gameObject.GetComponent<NavMeshAgent>();
         agent.speed = speed;
@@ -110,17 +114,18 @@ public class enemyAI : MonoBehaviour
         isDead = true;
         agent.isStopped = true;
         gameObject.GetComponent<Collider>().enabled = false;
-        
-       
-        
 
 
+
+        
         StartCoroutine(waitToDestroy());
     }
 
     IEnumerator waitToDestroy()
     {
+        
         yield return new WaitForSeconds(10);
+        
         //checking to see if this is an indpendent enemy or spawned enemy
         if (gameObject.GetComponentInParent<EnemySpawner>() != null)
         {
@@ -140,6 +145,13 @@ public class enemyAI : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    IEnumerator playDyingSfX()
+    {
+        //EnemySounds.clip = dying;
+        //EnemySounds.Play();
+        yield return new WaitForSeconds(dying.length);
     }
 
     public void playerIsDeadStopMoving(bool isDead)
