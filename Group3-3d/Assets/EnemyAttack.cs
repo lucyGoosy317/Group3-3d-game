@@ -27,8 +27,8 @@ public class EnemyAttack : MonoBehaviour
 
     private void Awake()
     {
-        spawner = GameObject.FindGameObjectWithTag(spawnName);
-        stopSpawner = spawner.GetComponent<EnemySpawner>();
+        //spawner = GameObject.FindGameObjectWithTag(spawnName);
+       // stopSpawner = spawner.GetComponent<EnemySpawner>();
     }
 
     // Start is called before the first frame update
