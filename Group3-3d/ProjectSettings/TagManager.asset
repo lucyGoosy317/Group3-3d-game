@@ -8,13 +8,33 @@ TagManager:
   - weapon
   - Enemy
   - EnemyMelee
-  - GreenCauldronPowerupManager
-  - RedCauldronPowerupManager
-  - PumpkinPowerupManager
-  - GraveyardPowerupManager
-  - rpg
-  - ak47
-  - gun
+  - weaponName
+  - ammoInMag
+  - ammoTotal
+  - M4
+  - AK74
+  - SAW
+  - levelnamedisplay
+  - m4Ammo
+  - akAmmo
+  - mgAmmo
+  - currenthealth
+  - maxhealth
+  - spawner
+  - animeLocation
+  - weaponLable
+  - deathmenu
+  - eventSystem
+  - optionmenu
+  - restartOption
+  - restartDeath
+  - restartOptions
+  - keypadinput
+  - gatekeeper
+  - keypadinteract
+  - numButton
+  - relic5
+  - endGame
   layers:
   - Default
   - TransparentFX
