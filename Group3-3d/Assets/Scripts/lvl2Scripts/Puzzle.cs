@@ -16,10 +16,11 @@ public class Puzzle : MonoBehaviour
     private bool allTrue = false;
     void Start()
     {
-        dancePanels[0] = false;
+        /*dancePanels[0] = false;
         dancePanels[1] = false;
         dancePanels[2] = false;
         dancePanels[3] = false;
+        */
 
         order[0] = "Blue";
         order[1] = "Red";
@@ -45,9 +46,15 @@ public class Puzzle : MonoBehaviour
         if (color == nextColor)
         {
             int index = Array.IndexOf(order, color);
-            nextColor = order[index];
-            dancePanels[index] = true;
-            Debug.Log("Correct color");
+            if (index == (order.Length) - 1)
+            {
+                Debug.Log("You did it!");
+                allTrue = true;
+                return true;
+            }
+            nextColor = order[index + 1];
+            //dancePanels[index] = true;
+            Debug.Log("Correct color. Next color is " + nextColor);
             return true;
 
         }else
