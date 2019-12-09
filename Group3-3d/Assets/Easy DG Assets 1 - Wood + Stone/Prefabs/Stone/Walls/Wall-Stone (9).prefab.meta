@@ -1,13 +1,12 @@
 fileFormatVersion: 2
-guid: ab81f7053ec51854a82c0f1f16fd6847
+guid: c7e3e4f291cb9214c8e54ca9bb9892d8
 labels:
 - Dungeon
 - EasyDG
 - Model
 - Stone
-timeCreated: 1498273967
-licenseType: Store
-NativeFormatImporter:
+PrefabImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 

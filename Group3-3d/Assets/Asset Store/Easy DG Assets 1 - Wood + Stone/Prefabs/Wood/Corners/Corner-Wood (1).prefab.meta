@@ -1,13 +1,12 @@
 fileFormatVersion: 2
-guid: 34aa8881937f6d34dae65bd3e4559d98
+guid: b2645203a851417459d9a257da8f0fc5
 labels:
 - Dungeon
 - EasyDG
 - Model
 - Wood
-timeCreated: 1498273304
-licenseType: Store
-NativeFormatImporter:
+PrefabImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
