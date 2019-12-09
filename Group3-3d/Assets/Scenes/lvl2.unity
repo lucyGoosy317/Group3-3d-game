@@ -5430,6 +5430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a89310167cb96c4bb9f3c94cda14578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PuzzleMaster: {fileID: 125289492}
   panelColor: Grey
   panelON: 0
 --- !u!1 &205715406
@@ -33045,6 +33046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a89310167cb96c4bb9f3c94cda14578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PuzzleMaster: {fileID: 125289492}
   panelColor: Red
   panelON: 0
 --- !u!1 &1173173019
@@ -37222,6 +37224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a89310167cb96c4bb9f3c94cda14578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PuzzleMaster: {fileID: 125289492}
   panelColor: Blue
   panelON: 0
 --- !u!1 &1350029597
@@ -43670,6 +43673,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Relic2
       objectReference: {fileID: 0}
+    - target: {fileID: 1362676597090820193, guid: 497c94e6c70f42c4e8ab4a7f43fde01a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1362676597090820197, guid: 497c94e6c70f42c4e8ab4a7f43fde01a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -45565,6 +45573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a89310167cb96c4bb9f3c94cda14578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PuzzleMaster: {fileID: 125289492}
   panelColor: Yellow
   panelON: 0
 --- !u!1 &1663025436
@@ -53410,6 +53419,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6288786393573655156, guid: 62bd7653a235ca74a814598a67c86bf4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6288786393573655112, guid: 62bd7653a235ca74a814598a67c86bf4,
         type: 3}
