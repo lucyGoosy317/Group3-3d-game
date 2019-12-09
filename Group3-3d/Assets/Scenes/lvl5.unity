@@ -560,7 +560,7 @@ GameObject:
   - component: {fileID: 133743219}
   m_Layer: 5
   m_Name: NumberCanvas (5)
-  m_TagString: Untagged
+  m_TagString: numButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1985,7 +1985,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: startMenu
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6229180480728715572, guid: bcaa41e9176feb043a8453616a7960d4, type: 3}
+    - {fileID: 4382369945254971180, guid: bcaa41e9176feb043a8453616a7960d4, type: 3}
+    - {fileID: 5600459810928816176, guid: bcaa41e9176feb043a8453616a7960d4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bcaa41e9176feb043a8453616a7960d4, type: 3}
 --- !u!1 &526315048
 GameObject:
@@ -3856,7 +3859,7 @@ PrefabInstance:
     - target: {fileID: 7984288427900458474, guid: 0a3360943e09de04e9b5c97b7eab8ffd,
         type: 3}
       propertyPath: m_Name
-      value: EventSystemKeyPad
+      value: EventSystemKeyPadDeathMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7984288427900458473, guid: 0a3360943e09de04e9b5c97b7eab8ffd,
         type: 3}
@@ -5408,6 +5411,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905fb7b5c694b0944b19619c1b01fcfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KeyPadInput: {fileID: 329719923}
+--- !u!114 &1641604203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641604193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e8a3ac9c846584d84997fc34321ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RestartButton: {fileID: 1988796507}
+  NumberUI: {fileID: 2104137439}
 --- !u!1 &1646697463
 GameObject:
   m_ObjectHideFlags: 0
@@ -6435,6 +6453,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EventSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 7984288427900458474, guid: 0a3360943e09de04e9b5c97b7eab8ffd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7984288427900458473, guid: 0a3360943e09de04e9b5c97b7eab8ffd,
         type: 3}
