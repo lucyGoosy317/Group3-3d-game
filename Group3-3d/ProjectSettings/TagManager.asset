@@ -29,6 +29,12 @@ TagManager:
   - restartOption
   - restartDeath
   - restartOptions
+  - keypadinput
+  - gatekeeper
+  - keypadinteract
+  - numButton
+  - relic5
+  - endGame
   layers:
   - Default
   - TransparentFX
@@ -38,11 +44,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Floor
+  - Shootable
+  - LightMask
+  - Invisible
+  - PostProcessing
   - 
   - 
   - 

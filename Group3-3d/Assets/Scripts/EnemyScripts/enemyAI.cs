@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class enemyAI : MonoBehaviour
 {
-    
+    public Rigidbody rigidbody;
     private NavMeshAgent agent;
     private EnemyAttack agentRange;
     private float rangeToStop;
@@ -26,12 +26,15 @@ public class enemyAI : MonoBehaviour
     public int attackValue;
     public int dyingValue;
 
-    //[Header("Enemy Body")]
-    private Rigidbody Enemyrigidbody;
-
+    [Header("Enemy clips")]
+    private EnemySpawner spawerAccess;
+    private AudioSource EnemySounds;
+    public AudioClip dying;
+    //public AudioClip attacking;
     // Start is called before the first frame update
     private void Awake()
-    {/*
+    {
+        EnemySounds = GetComponent<AudioSource>();
         Player = GameObject.FindGameObjectWithTag("Player");
         agent = gameObject.GetComponent<NavMeshAgent>();
         agent.speed = speed;
@@ -42,32 +45,25 @@ public class enemyAI : MonoBehaviour
         playerIsAlive = true;
         enemyAnime = gameObject.GetComponentInChildren<Animator>();
         isDead = false;
-    */
-        }
+    }
 
     void Start()
     {
-        Enemyrigidbody = GetComponent<Rigidbody>();
-        Player = GameObject.FindGameObjectWithTag("Player");
-        agent = gameObject.GetComponent<NavMeshAgent>();
-        agent.speed = speed;
-        // agent.updatePosition = false;
-        agent.SetDestination(Player.transform.position);
-        agentRange = gameObject.GetComponent<EnemyAttack>();
-        rangeToStop = agentRange.getRange();
-        playerIsAlive = true;
-        enemyAnime = gameObject.GetComponentInChildren<Animator>();
+
         isDead = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-       
 
-        if (playerIsAlive==false)
-           return;
+
+
+        if (playerIsAlive == false)
+        {
+            enemyAnime.SetInteger("condition",5);
+            return;
+        }
         agent.SetDestination(Player.transform.position);
         if (enemyHealth>0) {
             enemyAnime.SetInteger("condition",movementValue);
@@ -84,8 +80,6 @@ public class enemyAI : MonoBehaviour
           } else if (isDead)
             {
                 enemyAnime.SetInteger("condition", 0);
-                Enemyrigidbody.velocity = Vector3.zero;
-                Enemyrigidbody.angularVelocity = Vector3.zero;
                 agent.isStopped = true;
            }
         }
@@ -112,7 +106,7 @@ public class enemyAI : MonoBehaviour
 
     public void knockback (float blast)
     {
-        Enemyrigidbody.AddForce(Vector3.back * blast, ForceMode.Impulse);
+       gameObject.GetComponent<Rigidbody>().AddForce(Vector3.back * blast, ForceMode.Impulse);
     }
 
 
@@ -123,13 +117,44 @@ public class enemyAI : MonoBehaviour
         isDead = true;
         agent.isStopped = true;
         gameObject.GetComponent<Collider>().enabled = false;
+
+
+
+        
         StartCoroutine(waitToDestroy());
     }
 
     IEnumerator waitToDestroy()
     {
+        
         yield return new WaitForSeconds(10);
+        
+        //checking to see if this is an indpendent enemy or spawned enemy
+        if (gameObject.GetComponentInParent<EnemySpawner>() != null)
+        {
+            spawerAccess = gameObject.GetComponentInParent<EnemySpawner>();
+            if (spawerAccess.enemiesKilled >= spawerAccess.RandomAmountOfEnemies)
+            {
+                spawerAccess.enemiesKilled = 0;
+                spawerAccess.enemyCounter = 0;
+                StartCoroutine(spawerAccess.EndlessWaves());
+            }
+            else
+            {
+                spawerAccess.enemiesKilled++;
+            }
+
+            Debug.Log("child of spawner");
+        }
+
         Destroy(gameObject);
+    }
+
+    IEnumerator playDyingSfX()
+    {
+        //EnemySounds.clip = dying;
+        //EnemySounds.Play();
+        yield return new WaitForSeconds(dying.length);
     }
 
     public void playerIsDeadStopMoving(bool isDead)
