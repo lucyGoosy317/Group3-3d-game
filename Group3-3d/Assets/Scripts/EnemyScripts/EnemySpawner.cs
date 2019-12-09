@@ -39,11 +39,6 @@ public class EnemySpawner : MonoBehaviour
     public int maxAmountSpawn;
     private int totalEnemies;
 
-
-    private GameObject playerObj;
-    private playerHealth playerStatus;
-
-
     string enemyTag = "Enemy";
     public IEnumerator spawn; // in order to stop a coroutine must assign it
             
@@ -51,10 +46,6 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        playerObj = GameObject.FindGameObjectWithTag("Player");
-        playerStatus = playerObj.GetComponent<playerHealth>();
-
-
         spawn = EndlessWaves();
         StopSpawning = false;
         StartCoroutine(spawn);
@@ -68,11 +59,7 @@ public class EnemySpawner : MonoBehaviour
             //Debug.Log("Stopped spawning");
             StopCoroutine(spawn);
         }
-        if (playerStatus.getPlayerIsAlive()!=true)
-        {
-            Debug.Log("Stopped spawning");
-            StopCoroutine(spawn);
-        }
+
         
 
 
