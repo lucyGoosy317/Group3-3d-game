@@ -12,12 +12,14 @@ public class EnemySpawner : MonoBehaviour
     public int enemyIndexMin; //Used to determine if all you want the 0 index of the list or starting at a certain index
     public int enemyIndexSizeMax;  //used to determine the max range when spawning the list
     private int randEnemies; //used to store a random value from the index to spawn enemy
-
+    private Transform parent;
 
     [Header("Max and Min of enemies to be created during a wave attack")]
     public int maxSpawnNum; //max amount in wave
     public int minSpawnNum; //min amount in wave
-    private int RandomAmountOfEnemies; //will be the range of max and min
+    public int RandomAmountOfEnemies; //will be the range of max and min
+    public int enemiesKilled;
+    public int enemyCounter;
 
     [Header("Time between Spawning")]
     public float minSpawnTime; //waiting for seconds min between each enemy spawned
@@ -39,11 +41,6 @@ public class EnemySpawner : MonoBehaviour
     public int maxAmountSpawn;
     private int totalEnemies;
 
-
-    private GameObject playerObj;
-    private playerHealth playerStatus;
-
-
     string enemyTag = "Enemy";
     public IEnumerator spawn; // in order to stop a coroutine must assign it
             
@@ -51,13 +48,11 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        playerObj = GameObject.FindGameObjectWithTag("Player");
-        playerStatus = playerObj.GetComponent<playerHealth>();
-
-
+        parent = gameObject.transform;
         spawn = EndlessWaves();
         StopSpawning = false;
         StartCoroutine(spawn);
+        enemiesKilled = 0;
         
     }
 
@@ -68,11 +63,7 @@ public class EnemySpawner : MonoBehaviour
             //Debug.Log("Stopped spawning");
             StopCoroutine(spawn);
         }
-        if (playerStatus.getPlayerIsAlive()!=true)
-        {
-            Debug.Log("Stopped spawning");
-            StopCoroutine(spawn);
-        }
+
         
 
 
@@ -82,10 +73,11 @@ public class EnemySpawner : MonoBehaviour
     //Coroutine that will allow spawning event
     public IEnumerator EndlessWaves()
     {
-        
-        
+        enemiesKilled = 0;
+        enemyCounter = 0;
+        Debug.Log("Starting spawning");
             //Debug.Log("Start Spawning");
-            while (StopSpawning != true) {
+            while (enemyCounter<10) {
             //totalEnemies = findAllEnemies();
            //Debug.Log("Total enemies:" + totalEnemies);
            
@@ -98,15 +90,17 @@ public class EnemySpawner : MonoBehaviour
                     randEnemies = Random.Range(enemyIndexMin, enemyIndexSizeMax);
                     //  Debug.Log("Who is being Created: " + enemyList[randEnemies].name);
                     //note to self, make sure on awake the enemy gathers everything it needs before instantiate, such as destination, and other items need...find by tag
-                    Instantiate(enemyList[randEnemies], gameObject.transform.position, gameObject.transform.rotation);
+                    Instantiate(enemyList[randEnemies], gameObject.transform.position, gameObject.transform.rotation, parent);
+
 
                     //Space the enemies out between loop, so they dont stack on each other
                     yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
-                }
+                enemyCounter++;
+            }
                 //Time between waves
                 yield return new WaitForSeconds(Random.Range(minSpawnWave, maxSpawnWave));
             }
-            
+        Debug.Log("Stopped spawning, to many spawned from here");
     }
 
 

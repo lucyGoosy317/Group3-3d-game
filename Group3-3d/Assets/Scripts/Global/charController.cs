@@ -13,8 +13,10 @@ public class charController : MonoBehaviour
     private Vector3 moveDirection =Vector3.zero;
     private Animator playerAnime;
     private bool isAlive;
+    public bool stopPlayerMovement;
     void Start()
     {
+        stopPlayerMovement = false;
         controller = gameObject.GetComponent<CharacterController>();
         playerAnime = GetComponentInChildren<Animator>();
         isAlive = true;
@@ -27,7 +29,9 @@ public class charController : MonoBehaviour
 
     void Update()
     {
-        
+
+        if (stopPlayerMovement)
+            return;
         //CharacterController controller = GetComponent<CharacterController>();
         Debug.Log("player is:" +isAlive);
         if (isAlive==false)

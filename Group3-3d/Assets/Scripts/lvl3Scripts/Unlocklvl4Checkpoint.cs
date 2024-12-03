@@ -19,14 +19,14 @@ public class Unlocklvl4Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider player)
     {
-        if (player.gameObject.tag == "Enemy")
+        if (player.gameObject.tag == "Player")
         {
             showing = true;
-            DisableEnemy(player.gameObject);
+            //DisableEnemy(player.gameObject);
         }
 
     }
-
+/*
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Enemy")
@@ -49,4 +49,5 @@ public class Unlocklvl4Checkpoint : MonoBehaviour
         }
 
     }
+    */
 }
